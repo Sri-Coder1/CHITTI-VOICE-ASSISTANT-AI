@@ -10,7 +10,7 @@ from engine.config import ASSISTANT_NAME
 import pywhatkit as kit
 
 
-conn = sqlite3.connect("sophia.db")
+conn = sqlite3.connect("chitti.db")
 cursor = conn.cursor()
 #sound function for playing sound
 def playAssistantSound():
