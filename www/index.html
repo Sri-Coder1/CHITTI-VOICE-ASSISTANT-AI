@@ -1,92 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHITTI</title>
-    <link rel="shortcut icon" href="assets/img/sophia.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHITTI v2.1 — Voice AI</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <!-- Bootstrap Icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
-    <link rel="stylesheet" href="assets/vendore/texllate/animate.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="assets/img/sophia.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <section id="Oval" class="mb-4">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div id="loader-wrapper">
-                        <div id="loader">
-                            <div id="loader1">
-                            </div>
-                        </div>
-                        <p>CHITTI</p>
-                    </div>
-                    <h5 class="text-light text text-center">Ask me anything</h5>
-                    <!-- /****************************Input Box******************************/ -->
+<div class="space-container">
 
-                    <div class="col-md-12 mt-4 pt-4">
-                        <div class="text-center">
-                            <div id="textInput" class="d-flex">
-                                <input type="text" class="input-field" name="chatbox" id="chatbox"
-                                    placeholder="type here ... ">
-                                <button id="MicBtn" class="glow-on-hover"><i class="bi bi-mic"></i></button>
-                                <button id="ChatBtn" class="glow-on-hover" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i
-                                        class="bi bi-chat-dots"></i></button>
-                                <button id="SettingsBtn" class="glow-on-hover"><i class="bi bi-gear"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /****************************Input Box End******************************/ -->
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-        </section>
+  <!-- STAR BACKGROUND -->
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
 
-        <section id="SiriWave" class="mb-4" hidden>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-                            <div>
-                                <h5 class="text-start text-light mb-4 siri-message" style="font-size: 26px;">
-                                    Hello, I am S.O.P.H.I.A</h5>
-                                <div id="siri-container"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- CORE -->
+  <div class="chitti-container">
+
+    <!-- CHAT STATUS -->
+    <div id="chat-status" class="chat-status"></div>
+
+    <!-- RINGS -->
+    <div class="rings-wrapper">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring ring-4"></div>
+      <div class="ring ring-5"></div>
     </div>
 
-    
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <!-- CORE LOGO -->
+    <div class="chitti-core">
+      <span class="logo-text">CHITTI</span>
+    </div>
+  </div>
 
-    <!--Jquery  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="main.js"></script>
+  <!-- INPUT CONSOLE -->
+  <div class="glass-panel">
+    <input id="chatbox" type="text" placeholder="Ask me anything..." autocomplete="off"/>
+    <button id="MicBtn" class="icon-btn">
+      <i class="bi bi-mic"></i>
+    </button>
+    <button id="ChatBtn" class="icon-btn">
+      <i class="bi bi-send"></i>
+    </button>
+  </div>
+</div>
 
-    <!-- Texllate js -->
-    <script src="assets/vendore/texllate/jquery.fittext.js"></script>
-    <script src="assets/vendore/texllate/jquery.lettering.js"></script>
-    <script src="http://jschr.github.io/textillate/jquery.textillate.js"></script>
-    <script type="text/javascript" src="/eel.js"></script>
+<!-- DEPENDENCIES -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="/eel.js"></script>
 
-    <!-- Siri wave link -->
-    <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
-    <script src="./controller.js"></script>
-</body>
+<!-- ================= MAIN LOGIC ================= -->
+<script>
+  let isSpeaking = false;
+
+  /* -------- TEXT INPUT -------- */
+  function processPrompt() {
+    const input = document.getElementById("chatbox");
+    const query = input.value.trim();
+    if (!query) return;
+
+    eel.handleDynamicQuery(query);
+    input.value = "";
+  }
+
+  document.getElementById("ChatBtn").onclick = processPrompt;
+  document.getElementById("chatbox").addEventListener("keypress", e => {
+    if (e.key === "Enter") processPrompt();
+  });
+
+  /* -------- MIC / STOP BUTTON -------- */
+  document.getElementById("MicBtn").addEventListener("click", () => {
+    if (isSpeaking) {
+      eel.stopSpeaking();        // 🛑 stop speech
+    } else {
+      eel.toggle_listening();   // 🎙 start listening
+    }
+  });
+
+  /* -------- BACKEND → UI SPEAK STATE -------- */
+  eel.expose(setSpeakingState);
+  function setSpeakingState(state) {
+    isSpeaking = state;
+
+    const btn = document.getElementById("MicBtn");
+    const rings = document.querySelector(".rings-wrapper");
+
+    if (state) {
+      btn.innerHTML = '<i class="bi bi-stop-fill"></i>';
+      btn.style.color = "#ff3366";
+      rings.classList.add("faded");
+    } else {
+      btn.innerHTML = '<i class="bi bi-mic"></i>';
+      btn.style.color = "#00eaff";
+      rings.classList.remove("faded");
+    }
+  }
+
+  /* -------- STATUS CHAT BUBBLES -------- */
+  eel.expose(DisplayMessage);
+  function DisplayMessage(message) {
+    const container = document.getElementById("chat-status");
+
+    const bubble = document.createElement("div");
+    bubble.className = "status-bubble";
+
+    if (message.toLowerCase().startsWith("you said")) {
+      bubble.classList.add("user");
+    }
+
+    bubble.innerText = message;
+    container.appendChild(bubble);
+
+    while (container.children.length > 4) {
+      container.removeChild(container.firstChild);
+    }
+  }
+</script>
+<script>
+  eel.expose(DisplayAssistantMessage);
+
+  function DisplayAssistantMessage(text) {
+    const container = document.getElementById("chat-status");
+
+    const bubble = document.createElement("div");
+    bubble.className = "status-bubble assistant";
+
+    bubble.innerText = text;
+    container.appendChild(bubble);
+
+    // keep only last 5 messages
+    while (container.children.length > 5) {
+      container.removeChild(container.firstChild);
+    }
+  }
+</script>
+<script>
+  function forceCloseWindow() {
+    window.close();
+  }
+  eel.expose(forceCloseWindow);
+</script>
+
 </html>
