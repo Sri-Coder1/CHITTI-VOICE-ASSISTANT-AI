@@ -1,0 +1,52 @@
+# === Core Framework ===
+eel==0.16.0
+bottle==0.12.25
+bottle-websocket==0.2.9
+
+# === Speech & Audio ===
+pyttsx3==2.90
+SpeechRecognition==3.10.4
+playsound==1.2.2
+
+# === Web & HTTP ===
+requests==2.32.3
+beautifulsoup4==4.12.3
+wikipedia==1.4.0
+wikipedia-api==0.6.0
+
+# === Automation & UI ===
+pyautogui==0.9.54
+pymsgbox==1.0.9
+pygetwindow==0.0.9
+pyscreeze==0.1.30
+pytweening==1.0.7
+mouseinfo==0.1.3
+pyrect==0.2.0
+
+# === YouTube & Browser Control ===
+pywhatkit==5.4
+
+# === Google Gemini AI SDK ===
+google-generativeai==0.8.3
+protobuf==5.28.3
+google-api-core==2.19.2
+google-auth==2.36.0
+googleapis-common-protos==1.66.0
+
+# === Utilities ===
+colorama==0.4.6
+pyjokes==0.6.0
+tqdm==4.66.5
+pydantic==2.9.0
+typing-extensions==4.12.2
+
+# === Optional Voice Enhancements (recommended) ===
+pyaudio==0.2.14 ; platform_system=="Windows"
+
+# === Development Tools (optional) ===
+wheel==0.43.0
+setuptools==75.1.0
+
+eel==0.16.0
+bottle==0.12.25
+bottle-websocket==0.2.9
