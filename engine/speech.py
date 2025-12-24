@@ -1,67 +1,69 @@
 import eel
 import pyttsx3
-import threading
-import queue
+import time
 
-# ================== ENGINE SETUP ==================
-engine = pyttsx3.init()
-engine.setProperty("rate", 165)
-
-# Female voice (Windows)
-for v in engine.getProperty("voices"):
-    if "zira" in v.name.lower():
-        engine.setProperty("voice", v.id)
-        break
-
-# ================== STATE ==================
-speech_queue = queue.Queue()
 is_speaking = False
-lock = threading.Lock()
 
-# ================== SPEECH WORKER ==================
-def speech_loop():
+
+# ================== SPEECH FUNCTION ==================
+def speak(text: str):
+    """
+    Speak text synchronously. Recreates pyttsx3 engine every call
+    to avoid Windows SAPI lock issue after first speech.
+    """
     global is_speaking
 
-    while True:
-        text = speech_queue.get()
-        if text is None:
-            break
+    if not text or not isinstance(text, str):
+        return
 
-        with lock:
-            is_speaking = True
+    stopSpeaking()
+
+    try:
+        is_speaking = True
+        try:
             eel.setSpeakingState(True)
+        except:
+            pass
+
+        # ✅ Recreate engine fresh for every speech to prevent locking
+        engine = pyttsx3.init()
+        engine.setProperty("rate", 165)
+
+        for v in engine.getProperty("voices"):
+            if "zira" in v.name.lower():
+                engine.setProperty("voice", v.id)
+                break
 
         engine.say(text)
-        engine.runAndWait()   # 🔥 ONLY PLACE runAndWait is called
+        engine.runAndWait()
+        engine.stop()  # ensure loop fully closes
+        del engine     # cleanup
 
-        with lock:
-            is_speaking = False
+    except Exception as e:
+        print(f"[Speech Error] {e}")
+
+    finally:
+        is_speaking = False
+        try:
             eel.setSpeakingState(False)
+        except:
+            pass
 
-        speech_queue.task_done()
 
-# ================== START BACKGROUND THREAD ==================
-speech_thread = threading.Thread(target=speech_loop, daemon=True)
-speech_thread.start()
-
-# ================== PUBLIC API ==================
-def speak(text):
-    clear_queue()
-    speech_queue.put(text)
-
+# ================== STOP SPEAKING ==================
 @eel.expose
 def stopSpeaking():
+    """Stop any ongoing speech."""
     global is_speaking
-    clear_queue()
-    if is_speaking:
-        engine.stop()
-        is_speaking = False
+    is_speaking = False
+    try:
         eel.setSpeakingState(False)
+    except:
+        pass
 
-def clear_queue():
-    while not speech_queue.empty():
-        try:
-            speech_queue.get_nowait()
-            speech_queue.task_done()
-        except queue.Empty:
-            break
+
+# ================== SHUTDOWN ==================
+def shutdown_speech():
+    """Gracefully shutdown TTS system."""
+    stopSpeaking()
+    print("[Speech Engine] Shutdown complete.")
